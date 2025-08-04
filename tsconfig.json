@@ -11,6 +11,9 @@
     },
     {
       "path": "./libs/ui-dashboard"
+    },
+    {
+      "path": "./libs/tools"
     }
   ]
 }

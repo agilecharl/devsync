@@ -25,6 +25,9 @@ export default defineConfig(() => ({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+    rollupOptions: {
+      external: ['pty.js', 'term.js'],
+    },
   },
   test: {
     watch: false,
@@ -36,5 +39,8 @@ export default defineConfig(() => ({
       reportsDirectory: './test-output/vitest/coverage',
       provider: 'v8' as const,
     },
+  },
+  optimizeDeps: {
+    exclude: ['pty.js', 'term.js'],
   },
 }));
