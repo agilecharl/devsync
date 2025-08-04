@@ -8,6 +8,9 @@
     },
     {
       "path": "./apps/devsync"
+    },
+    {
+      "path": "./libs/ui-dashboard"
     }
   ]
 }

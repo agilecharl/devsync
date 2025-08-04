@@ -1,5 +1,11 @@
+import { UiDashboard } from '@devsync/ui-dashboard';
+
 export function App() {
-  return <div></div>;
+  return (
+    <div>
+      <UiDashboard />
+    </div>
+  );
 }
 
 export default App;
