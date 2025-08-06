@@ -1,6 +1,6 @@
 /// <reference types='vitest' />
-import { defineConfig } from 'vite';
 import { reactRouter } from '@react-router/dev/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
   root: __dirname,
@@ -14,10 +14,6 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   plugins: [!process.env.VITEST && reactRouter()],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [ nxViteTsPaths() ],
-  // },
   build: {
     outDir: './dist',
     emptyOutDir: true,
@@ -26,7 +22,7 @@ export default defineConfig(() => ({
       transformMixedEsModules: true,
     },
     rollupOptions: {
-      external: ['pty.js', 'term.js'],
+      external: ['pty.js'],
     },
   },
   test: {
@@ -41,6 +37,6 @@ export default defineConfig(() => ({
     },
   },
   optimizeDeps: {
-    exclude: ['pty.js', 'term.js'],
+    exclude: ['pty.js'],
   },
 }));
