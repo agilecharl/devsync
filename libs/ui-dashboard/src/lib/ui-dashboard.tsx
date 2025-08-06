@@ -1,17 +1,66 @@
-import { connect, list } from '@devsync/tools';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import config from '../../../config.json';
 import styles from './ui-dashboard.module.scss';
 
 export function UiDashboard() {
-  useEffect(() => {
-    connect()
-      .then(() => {
-        console.log('Connected to DevSync tools');
-        list();
-      })
-      .catch((error) => {
-        console.error('Failed to connect to DevSync tools:', error);
+  const [todosCount, setTodosCount] = useState(0);
+  const [notificationsCount, setNotificationsCount] = useState(0);
+
+  const getTodosCount = async () => {
+    try {
+      const apiUrl = config.apiUrl || 'http://localhost:3000/api';
+      const fullUrl = `${apiUrl}/todos/count`;
+
+      const response = await fetch(fullUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch todos count: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const data = (await response.json()) as { count?: number };
+      setTodosCount(data.count || 0);
+    } catch (error) {
+      console.error('Error fetching todos count:', error);
+      return 0;
+    }
+  };
+
+  const getNotificationsCount = async () => {
+    try {
+      const apiUrl = config.apiUrl || 'http://localhost:3000/api';
+      const fullUrl = `${apiUrl}/notifications/count`;
+
+      const response = await fetch(fullUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch notifications count: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const data = (await response.json()) as { count?: number };
+      setNotificationsCount(data.count || 0);
+    } catch (error) {
+      console.error('Error fetching notifications count:', error);
+      return 0;
+    }
+  };
+
+  useEffect(() => {
+    getTodosCount();
+    getNotificationsCount();
   }, []);
 
   return (
@@ -27,7 +76,7 @@ export function UiDashboard() {
           }}
         >
           <h2>Todos</h2>
-          <p>{/* Replace with actual todos count */}0</p>
+          <p>{todosCount}</p>
         </div>
         <div
           style={{
@@ -51,7 +100,7 @@ export function UiDashboard() {
           }}
         >
           <h2>Notifications</h2>
-          <p>{/* Replace with actual notifications count */}0</p>
+          <p>{notificationsCount}</p>
         </div>
       </div>
       <div style={{ marginTop: '24px' }}>
