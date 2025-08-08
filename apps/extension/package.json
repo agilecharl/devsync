@@ -24,6 +24,9 @@
     "typescript": "5.3.3"
   },
   "manifest": {
+    "name": "DevSync Extension",
+    "version": "0.0.1",
+    "description": "Dev Sync extension.",
     "host_permissions": [
       "https://*/*"
     ]
