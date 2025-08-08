@@ -1,0 +1,27 @@
+{
+  "name": "extension",
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "plasmo dev",
+        "cwd": "apps/extension"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "plasmo build",
+        "cwd": "apps/extension"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm lint",
+        "cwd": "apps/extension"
+      }
+    }
+  },
+  "tags": []
+}
